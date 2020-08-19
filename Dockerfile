@@ -22,6 +22,7 @@ RUN yum clean all && rm -rf /var/cache/yum/* \
       openshift~=0.10.0 \
       ansible~=2.9 \
       jmespath \
+      -i https://pypi.tuna.tsinghua.edu.cn/simple\
  && yum remove -y gcc libffi-devel openssl-devel python36-devel \
  && yum clean all \
  && rm -rf /var/cache/yum
