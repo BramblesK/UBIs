@@ -27,7 +27,7 @@ RUN yum clean all && rm -rf /var/cache/yum/* \
  && yum clean all \
  && rm -rf /var/cache/yum
 
-COPY ansible-operator-dev-linux-gnu /usr/local/bin/ansible-operator
+#COPY ansible-operator-dev-linux-gnu /usr/local/bin/ansible-operator
 
 # Ensure directory permissions are properly set
 RUN echo "${USER_NAME}:x:${USER_UID}:0:${USER_NAME} user:${HOME}:/sbin/nologin" >> /etc/passwd \
@@ -43,6 +43,7 @@ WORKDIR ${HOME}
 USER ${USER_UID}
 ENTRYPOINT ["/tini", "--", "/usr/local/bin/ansible-operator", "run", "--watches-file=./watches.yaml"]
 
+FROM quay.io/operator-framework/ansible-operator:v0.9.0
 USER root
 RUN python -m pip install --upgrade --force pip -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip install setuptools==33.1.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
